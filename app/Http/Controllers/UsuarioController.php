@@ -61,7 +61,6 @@ class UsuarioController extends Controller
           return response()->json(['message'=>'Erro','Tipo a ser relacionado não existe !'],404);
         }
         
-    
         if( $usuarios->save() ){
           return new UsuariosResource( $usuarios );
         }
