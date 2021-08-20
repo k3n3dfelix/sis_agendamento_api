@@ -14,11 +14,13 @@ use App\Http\Controllers\TipoController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('tipos', [TipoController::class,'index']);
-Route::get('tipo/{id}', [TipoController::class,'show']);
-Route::post('tipo', [TipoController::class, 'store']);
-Route::put('tipo/{id}', [TipoController::class, 'update']);
-Route::delete('tipo/{id}', [TipoController::class,'destroy']);
+//Rotas de Tipos de Usuários
+Route::get('tipos', [TipoController::class,'index'])->middleware('auth:api');
+Route::get('tipo/{id}', [TipoController::class,'show'])->middleware('auth:api');
+Route::post('tipo', [TipoController::class, 'store'])->middleware('auth:api');
+Route::put('tipo/{id}', [TipoController::class, 'update'])->middleware('auth:api');
+Route::delete('tipo/{id}', [TipoController::class,'destroy'])->middleware('auth:api');
+
 Route::get('beers', [TipoController::class,'liste']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
