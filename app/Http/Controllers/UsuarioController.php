@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Usuarios as Usuarios;
+use App\Models\Tipos as Tipos;
 use App\Http\Resources\usuarios as UsuariosResource;
 use lluminate\Http\Response;
 use Validator;
@@ -46,6 +47,7 @@ class UsuarioController extends Controller
         if($validator->fails()){
           return response()->json(['message'=>'Erro','errors'=> $validator->errors()],400);
         }
+        
         $usuarios = new Usuarios;
         $usuarios->tipo_id = $request->input('tipo_id');
         $usuarios->nome = $request->input('nome');
@@ -53,6 +55,11 @@ class UsuarioController extends Controller
         $usuarios->login = $request->input('login');
         $senha= bcrypt($request->input('senha'));
         $usuarios->senha = $senha;
+        
+        $tipo = $request->input('tipo_id');
+        if(!Tipos::find($tipo)){
+          return response()->json(['message'=>'Erro','Tipo a ser relacionado não existe !'],404);
+        }
         
     
         if( $usuarios->save() ){
