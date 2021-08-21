@@ -20,4 +20,8 @@ class Usuarios extends Model
         return $this->hasMany('App\Models\Aulas', 'usuario_id');
     }
 
+    public function agendas(){
+        return $this->hasMany('App\Models\Agenda', 'usuario_id');
+    }
+
 }

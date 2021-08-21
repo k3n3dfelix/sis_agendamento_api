@@ -31,11 +31,11 @@ class AulaController extends Controller
     public function index()
     {
         try{ 
-            $aulas = Aulas::paginate(5);
-            return AulasResource::collection($aulas);
-            }catch(\Exception $e){
-            return response()->json('Ocorreu um erro no servidor',500);
-            }
+          $aulas = Aulas::paginate(5);
+          return AulasResource::collection($aulas);
+          }catch(\Exception $e){
+          return response()->json('Ocorreu um erro no servidor',500);
+        }
     }
 
     /**
@@ -46,29 +46,29 @@ class AulaController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            $validator = $this->validarAula($request);
-            if($validator->fails()){
-              return response()->json(['message'=>'Erro','errors'=> $validator->errors()],400);
-            }
-            
-            $aulas = new Aulas;
-            $aulas->usuario_id = $request->input('usuario_id');
-            $aulas->materia = $request->input('materia');
-            $aulas->data = $request->input('data');
-            $aulas->hora = $request->input('hora');
-          
-            $usuario_id = $request->input('usuario_id');
-            if(!Usuarios::find($usuario_id)){
-              return response()->json(['message'=>'Erro','Usuario a ser relacionado não existe !'],404);
-            }
-            
-            if( $aulas->save() ){
-              return new AulasResource( $aulas );
-            }
-          }catch(\Exception $e){
-            return response()->json('Ocorreu um erro no servidor',500);
+      try{
+          $validator = $this->validarAula($request);
+          if($validator->fails()){
+            return response()->json(['message'=>'Erro','errors'=> $validator->errors()],400);
           }
+          
+          $aulas = new Aulas;
+          $aulas->usuario_id = $request->input('usuario_id');
+          $aulas->materia = $request->input('materia');
+          $aulas->data = $request->input('data');
+          $aulas->hora = $request->input('hora');
+        
+          $usuario_id = $request->input('usuario_id');
+          if(!Usuarios::find($usuario_id)){
+            return response()->json(['message'=>'Erro','Usuario a ser relacionado não existe !'],404);
+          }
+          
+          if( $aulas->save() ){
+            return new AulasResource( $aulas );
+          }
+        }catch(\Exception $e){
+          return response()->json('Ocorreu um erro no servidor',500);
+        }
     }
 
     /**
@@ -96,19 +96,19 @@ class AulaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-            $aulas = Aulas::findOrFail( $request->id );
-            $aulas->usuario_id = $request->input('usuario_id');
-            $aulas->materia = $request->input('materia');
-            $aulas->data = $request->input('data');
-            $aulas->hora = $request->input('hora');
-           
-            if( $aulas->save() ){
-              return new AulasResource( $aulas );
-            }
-          }catch(\Exception $e){
-            return response()->json('Ocorreu um erro no servidor',500);
+      try{
+          $aulas = Aulas::findOrFail( $request->id );
+          $aulas->usuario_id = $request->input('usuario_id');
+          $aulas->materia = $request->input('materia');
+          $aulas->data = $request->input('data');
+          $aulas->hora = $request->input('hora');
+          
+          if( $aulas->save() ){
+            return new AulasResource( $aulas );
           }
+        }catch(\Exception $e){
+          return response()->json('Ocorreu um erro no servidor',500);
+        }
     }
 
     /**

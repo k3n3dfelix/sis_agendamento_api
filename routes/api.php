@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AulaController;
+use App\Http\Controllers\AgendaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,13 @@ Route::get('aula/{id}', [AulaController::class,'show']);
 Route::post('aula', [AulaController::class, 'store']);
 Route::put('aula/{id}', [AulaController::class, 'update']);
 Route::delete('aula/{id}', [AulaController::class,'destroy']);
+
+//Rotas de Aulas----------------------------------------------------------
+Route::get('agendas', [AgendaController::class,'index']);
+Route::get('agenda/{id}', [AgendaController::class,'show']);
+Route::post('agenda', [AgendaController::class, 'store']);
+Route::put('agenda/{id}', [AgendaController::class, 'update']);
+Route::delete('agenda/{id}', [AgendaController::class,'destroy']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
