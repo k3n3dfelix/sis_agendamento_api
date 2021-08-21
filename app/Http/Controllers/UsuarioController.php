@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Usuarios as Usuarios;
-use App\Models\Tipos as Tipos;
-use App\Http\Resources\usuarios as UsuariosResource;
+use App\Models\Usuarios ;
+use App\Models\Tipos;
+use App\Http\Resources\Usuarios as UsuariosResource;
 use lluminate\Http\Response;
 use Validator;
 
@@ -30,9 +30,13 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+      try{ 
         $usuarios = Usuarios::paginate(5);
         return UsuariosResource::collection($usuarios);
+      }catch(\Exception $e){
+        return response()->json('Ocorreu um erro no servidor',500);
+      }
     }
 
     /**
@@ -42,7 +46,8 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    { 
+      try{
         $validator = $this->validarusuario($request);
         if($validator->fails()){
           return response()->json(['message'=>'Erro','errors'=> $validator->errors()],400);
@@ -64,6 +69,9 @@ class UsuarioController extends Controller
         if( $usuarios->save() ){
           return new UsuariosResource( $usuarios );
         }
+      }catch(\Exception $e){
+        return response()->json('Ocorreu um erro no servidor',500);
+      }
     }
 
     /**
@@ -73,9 +81,13 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    { 
+      try{
         $usuarios = Usuarios::findOrFail($id);
         return new UsuariosResource( $usuarios );
+      }catch(\Exception $e){
+        return response()->json('Ocorreu um erro no servidor',500);
+      }
     }
 
     /**
@@ -86,7 +98,8 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    { 
+      try{
         $usuarios = Usuarios::findOrFail( $request->id );
         $usuarios->tipo_id = $request->input('tipo_id');
         $usuarios->nome = $request->input('nome');
@@ -98,6 +111,9 @@ class UsuarioController extends Controller
         if( $usuarios->save() ){
           return new UsuariosResource( $usuarios );
         }
+      }catch(\Exception $e){
+        return response()->json('Ocorreu um erro no servidor',500);
+      }
     }
 
     /**
@@ -107,10 +123,14 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    { 
+      try{
         $usuarios = Usuarios::findOrFail( $id );
         if( $usuarios->delete() ){
           return new UsuariosResource( $usuarios );
         }
+      }catch(\Exception $e){
+        return response()->json('Ocorreu um erro no servidor',500);
+      }
     }
 }
