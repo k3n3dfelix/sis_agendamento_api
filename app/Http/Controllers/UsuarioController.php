@@ -48,7 +48,7 @@ class UsuarioController extends Controller
     public function store(Request $request)
     { 
       try{
-        $validator = $this->validarusuario($request);
+        $validator = $this->validarUsuario($request);
         if($validator->fails()){
           return response()->json(['message'=>'Erro','errors'=> $validator->errors()],400);
         }
@@ -127,7 +127,8 @@ class UsuarioController extends Controller
       try{
         $usuarios = Usuarios::findOrFail( $id );
         if( $usuarios->delete() ){
-          return new UsuariosResource( $usuarios );
+          //return new UsuariosResource( $usuarios );
+          return response()->json('Registro apagado com sucesso !',200);
         }
       }catch(\Exception $e){
         return response()->json('Ocorreu um erro no servidor',500);

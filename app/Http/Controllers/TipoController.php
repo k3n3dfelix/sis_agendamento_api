@@ -72,7 +72,8 @@ class TipoController extends Controller
         try{
           $tipos = Tipos::findOrFail( $id );
           if( $tipos->delete() ){
-            return new TiposResource( $tipos );
+            //return new TiposResource( $tipos );
+            return response()->json('Registro apagado com sucesso !',200);
           }
         }catch(\Exception $e){
           return response()->json('Ocorreu um erro no servidor',500);

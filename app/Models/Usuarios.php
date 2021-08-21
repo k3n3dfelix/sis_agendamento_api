@@ -15,4 +15,9 @@ class Usuarios extends Model
     {
         return $this->belongsTo('App\Models\Tipos', 'tipo_id');
     }
+
+    public function aulas(){
+        return $this->hasMany('App\Models\Aulas', 'usuario_id');
+    }
+
 }
