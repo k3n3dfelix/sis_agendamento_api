@@ -20,32 +20,32 @@ use App\Http\Controllers\AgendaController;
 
 //Rotas de tipo Usuário-----------------------------------------------------
 Route::get('tipos', [TipoController::class,'index'])->middleware(['auth:api']);
-Route::get('tipo/{id}', [TipoController::class,'show']);
-Route::post('tipo', [TipoController::class, 'store']);
-Route::put('tipo/{id}', [TipoController::class, 'update']);
-Route::delete('tipo/{id}', [TipoController::class,'destroy']);
+Route::get('tipo/{id}', [TipoController::class,'show'])->middleware(['auth:api']);
+Route::post('tipo', [TipoController::class, 'store'])->middleware(['auth:api']);
+Route::put('tipo/{id}', [TipoController::class, 'update'])->middleware(['auth:api']);
+Route::delete('tipo/{id}', [TipoController::class,'destroy'])->middleware(['auth:api']);
 
 
 //Rotas de Usuários----------------------------------------------------------
-Route::get('usuarios', [UsuarioController::class,'index']);
-Route::get('usuario/{id}', [UsuarioController::class,'show']);
-Route::post('usuario', [UsuarioController::class, 'store']);
-Route::put('usuario/{id}', [UsuarioController::class, 'update']);
-Route::delete('usuario/{id}', [UsuarioController::class,'destroy']);
+Route::get('usuarios', [UsuarioController::class,'index'])->middleware(['auth:api']);
+Route::get('usuario/{id}', [UsuarioController::class,'show'])->middleware(['auth:api']);
+Route::post('usuario', [UsuarioController::class, 'store'])->middleware(['auth:api']);
+Route::put('usuario/{id}', [UsuarioController::class, 'update'])->middleware(['auth:api']);
+Route::delete('usuario/{id}', [UsuarioController::class,'destroy'])->middleware(['auth:api']);
 
 //Rotas de Aulas----------------------------------------------------------
-Route::get('aulas', [AulaController::class,'index']);
-Route::get('aula/{id}', [AulaController::class,'show']);
-Route::post('aula', [AulaController::class, 'store']);
-Route::put('aula/{id}', [AulaController::class, 'update']);
-Route::delete('aula/{id}', [AulaController::class,'destroy']);
+Route::get('aulas', [AulaController::class,'index'])->middleware(['auth:api']);
+Route::get('aula/{id}', [AulaController::class,'show'])->middleware(['auth:api']);
+Route::post('aula', [AulaController::class, 'store'])->middleware(['auth:api']);
+Route::put('aula/{id}', [AulaController::class, 'update'])->middleware(['auth:api']);
+Route::delete('aula/{id}', [AulaController::class,'destroy'])->middleware(['auth:api']);
 
-//Rotas de Aulas----------------------------------------------------------
-Route::get('agendas', [AgendaController::class,'index']);
-Route::get('agenda/{id}', [AgendaController::class,'show']);
-Route::post('agenda', [AgendaController::class, 'store']);
-Route::put('agenda/{id}', [AgendaController::class, 'update']);
-Route::delete('agenda/{id}', [AgendaController::class,'destroy']);
+//Rotas de Agendas----------------------------------------------------------
+Route::get('agendas', [AgendaController::class,'index'])->middleware(['auth:api']);
+Route::get('agenda/{id}', [AgendaController::class,'show'])->middleware(['auth:api']);
+Route::post('agenda', [AgendaController::class, 'store'])->middleware(['auth:api']);
+Route::put('agenda/{id}', [AgendaController::class, 'update'])->middleware(['auth:api']);
+Route::delete('agenda/{id}', [AgendaController::class,'destroy'])->middleware(['auth:api']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
