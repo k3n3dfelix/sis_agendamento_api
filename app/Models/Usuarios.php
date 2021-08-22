@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class Usuarios extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
+
     protected $fillable = ['descricao','tipo_id','nome','sobrenome','login','senha'];
     protected $primaryKey = 'id_usuario';
 
@@ -23,5 +28,4 @@ class Usuarios extends Model
     public function agendas(){
         return $this->hasMany('App\Models\Agenda', 'usuario_id');
     }
-
 }

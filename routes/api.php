@@ -19,7 +19,7 @@ use App\Http\Controllers\AgendaController;
 */
 
 //Rotas de tipo Usuário-----------------------------------------------------
-Route::get('tipos', [TipoController::class,'index']);
+Route::get('tipos', [TipoController::class,'index'])->middleware(['auth:api']);
 Route::get('tipo/{id}', [TipoController::class,'show']);
 Route::post('tipo', [TipoController::class, 'store']);
 Route::put('tipo/{id}', [TipoController::class, 'update']);
