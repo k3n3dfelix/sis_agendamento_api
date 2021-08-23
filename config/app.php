@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://sisagendamentoapi.herokuapp.com/'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -119,7 +119,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY','base64:YyS8Ary2K8X8ao1Vc1ZObJl75IpUs6vtoEx1gqYsavA='),
 
     'cipher' => 'AES-256-CBC',
 
